@@ -13,11 +13,7 @@ func UnpackMessage(message *[]byte) Message {
 	var m Message
 	length := binary.BigEndian.Uint16((*message)[:2])
 	m.Address = (*message)[2]
-	s := ""
-	for i := 3; i < int(length)+3; i++ {
-		s += string((*message)[i])
-	}
-	m.Text = s
+	m.Text = string((*message)[3 : length+2])
 	return m
 }
 
